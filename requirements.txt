@@ -2,3 +2,7 @@ dvc[azure]
 numpy
 pandas
 scikit-learn
+wget
+seaborn
+matplotlib
+

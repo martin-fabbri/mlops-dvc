@@ -1,0 +1,39 @@
+get_data:
+  cmd: python3 pipeline/get_data.py
+  deps:
+  - path: pipeline/get_data.py
+    md5: 5799d3f887216779a12d1a091dc42a85
+    size: 415
+  outs:
+  - path: artifacts/data_raw.csv
+    md5: a6aec8da63a5fa2619af025a76746f29
+    size: 68868
+process:
+  cmd: python3 pipeline/process_data.py
+  deps:
+  - path: artifacts/data_raw.csv
+    md5: a6aec8da63a5fa2619af025a76746f29
+    size: 68868
+  - path: pipeline/process_data.py
+    md5: 9fb9834fbce1219e666e5ae9b1fd5a70
+    size: 1032
+  outs:
+  - path: artifacts/data_processed.csv
+    md5: 03269b6c0a766dc80e090326008765b3
+    size: 24227
+train:
+  cmd: python3 pipeline/train_model.py
+  deps:
+  - path: artifacts/data_processed.csv
+    md5: 03269b6c0a766dc80e090326008765b3
+    size: 24227
+  - path: pipeline/train_model.py
+    md5: 9c9a714adbcda2c89adbf1d5df49c2f9
+    size: 1465
+  outs:
+  - path: artifacts/by_region.png
+    md5: 28bed57d3405d747645ae0f22e8bf114
+    size: 7812
+  - path: artifacts/metrics.json
+    md5: f4844c28505568f336c5f91db3f1beb3
+    size: 89

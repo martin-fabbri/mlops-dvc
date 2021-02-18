@@ -1,0 +1,25 @@
+stages:
+  get_data:
+    cmd: python3 pipeline/get_data.py
+    deps:
+    - pipeline/get_data.py
+    outs:
+    - artifacts/data_raw.csv
+  process:
+    cmd: python3 pipeline/process_data.py
+    deps:
+    - pipeline/process_data.py
+    - artifacts/data_raw.csv
+    outs:
+    - artifacts/data_processed.csv
+  train:
+    cmd: python3 pipeline/train_model.py
+    deps:
+    - artifacts/data_processed.csv
+    - pipeline/train_model.py
+    outs:
+    - artifacts/by_region.png
+    metrics:
+    - artifacts/metrics.json:
+        cache: false
+
